@@ -1,19 +1,26 @@
+#Required packages
+  #CRAN
 library(Rpdb)
 library(data.table)
+  #From bioconductor
 library(muscle)
 library(Biostrings)
 library(seqinr)
 library(lettercase)
 
-
 #Full Length sequence (experimental data sequence)
 templateSeq<-AAString("MNNQRKKAKNTPFNMLKRERNRVSTVQQLTKRFSLGMLQGRGPLKLFMALVAFLRFLTIPPTAGILKRWGTIKKSKAINVLRGFRKEIGRMLNILNRRRRSAGMIIMLIPTVMAFHLTTRNGEPHMIVSRQEKGKSLLFKTEDGVNMCTLMAMDLGELCEDTITYKCPLLRQNEPEDIDCWCNSTSTWVTYGTCTTMGEHRREKRSVALVPHVGMGLETRTETWMSSEGAWKHVQRIETWILRHPGFTMMAAILAYTIGTTHFQRALIFILLTAVTPSMTMRCIGMSNRDFVEGVSGGSWVDIVLEHGSCVTTMAKNKPTLDFELIKTEAKQPATLRKYCIEAKLTNTTTESRCPTQGEPSLNEEQDKRFVCKHSMVDRGWGNGCGLFGKGGIVTCAMFRCKKNMEGKVVQPENLEYTIVITPHSGEEHAVGNDTGKHGKEIKITPQSSITEAELTGYGTVTMECSPRTGLDFNEMVLLQMENKAWLVHRQWFLDLPLPWLPGADTQGSNWIQKETLVTFKNPHAKKQDVVVLGSQEGAMHTALTGATEIQMSSGNLLFTGHLKCRLRMDKLQLKGMSYSMCTGKFKVVKEIAETQHGTIVIRVQYEGDGSPCKIPFEIMDLEKRHVLGRLITVNPIVTEKDSPVNIEAEPPFGDSYIIIGVEPGQLKLNWFKKGSSIGQMFETTMRGAKRMAILGDTAWDFGSLGGVFTSIGKALHQVFGAIYGAAFSGVSWTMKILIGVIITWIGMNSRSTSLSVTLVLVGIVTLYLGVMVQADSGCVVSWKNKELKCGSGIFITDNVHTWTEQYKFQPESPSKLASAIQKAHEEGICGIRSVTRLENLMWKQITPELNHILSENEVKLTIMTGDIKGIMQAGKRSLRPQPTELKYSWKTWGKAKMLSTESHNQTFLIDGPETAECPNTNRAWNSLEVEDYGFGVFTTNIWLKLKEKQDVFCDSKLMSAAIKDNRAVHADMGYWIESALNDTWKIEKASFIEVKNCHWPKSHTLWSNGVLESEMIIPKNLAGPVSQHNYRPGYHTQITGPWHLGKLEMDFDFCDGTTVVVTEDCGNRGPSLRTTTASGKLITEWCCRSCTLPPLRYRGEDGCWYGMEIRPLKEKEENLVNSLVTAGHGQVDNFSLGVLGMALFLEEMLRTRVGTKHAILLVAVSFVTLITGNMSFRDLGRVMVMVGATMTDDIGMGVTYLALLAAFKVRPTFAAGLLLRKLTSKELMMTTIGIVLLSQSTIPETILELTDALALGMMVLKMVRNMEKYQLAVTIMAILCVPNAVILQNAWKVSCTILAVVSVSPLLLTSSQQKTDWIPLALTIKGLNPTAIFLTTLSRTSKKRSWPLNEAIMAVGMVSILASSLLKNDIPMTGPLVAGGLLTVCYVLTGRSADLELERAADVKWEDQAEISGSSPILSITISEDGSMSIKNEEEEQTLTILIRTGLLVISGLFPVSIPITAAAWYLWEVKKQRAGVLWDVPSPPPMGKAELEDGAYRIKQKGILGYSQIGAGVYKEGTFHTMWHVTRGAVLMHKGKRIEPSWADVKKDLISYGGGWKLEGEWKEGEEVQVLALEPGKNPRAVQTKPGLFKTNAGTIGAVSLDFSPGTSGSPIIDKKGKVVGLYGNGVVTRSGAYVSAIAQTEKSIEDNPEIEDDIFRKRRLTIMDLHPGAGKTKRYLPAIVREAIKRGLRTLILAPTRVVAAEMEEALRGLPIRYQTPAIRAEHTGREIVDLMCHATFTMRLLSPVRVPNYNLIIMDEAHFTDPASIAARGYISTRVEMGEAAGIFMTATPPGSRDPFPQSNAPIIDEEREIPERSWNSGHEWVTDFKGKTVWFVPSIKAGNDIAACLRKNGKKVIQLSRKTFDSEYVKTRTNDWDFVVTTDISEMGANFKAERVIDPRRCMKPVILTDGEERVILAGPMPVTHSSAAQRRGRIGRNPKNENDQYIYMGEPLENDEDCAHWKEAKMLLDNINTPEGIIPSMFEPEREKVDAIDGEYRLRGEARKTFVDLMRRGDLPVWLAYRVAAEGINYADRRWCFDGVKNNQILEENVEVEIWTKEGERKKLKPRWLDARIYSDPLALKEFKEFAAGRKSLTLNLITEMGRLPTFMTQKARDALDNLAVLHTAEAGGRAYNHALSELPETLETLLLLTLLATVTGGIFLFLMSGRGIGKMTLGMCCIITASILLWYAQIQPHWIAASIILEFFLIVLLIPEPEKQRTPQDNQLTYVVIAILTVVAATMANEMGFLEKTKKDLGLGSIATQQPESNILDIDLRPASAWTLYAVATTFVTPMLRHSIENSSVNVSLTAIANQATVLMGLGKGWPLSKMDIGVPLLAIGCYSQVNPITLTAALFLLVAHYAIIGPGLQAKATREAQKRAAAGIMKNPTVDGITVIDLDPIPYDPKFEKQLGQVMLLVLCVTQVLMMRTTWALCEALTLATGPISTLWEGNPGRFWNTTIAVSMANIFRGSYLAGAGLLFSIMKNTTNTRRGTGNIGETLGEKWKSRLNALGKSEFQIYKKSGIQEVDRTLAKEGIKRGETDHHAVSRGSAKLRWFVERNMVTPEGKVVDLGCGRGGWSYYCGGLKNVREVKGLTKGGPGHEEPIPMSTYGWNLVRLQSGVDVFFIPPEKCDTLLCDIGESSPNPTVEAGRTLRVLNLVENWLNNNTQFCIKVLNPYMPSVIEKMEALQRKYGGALVRNPLSRNSTHEMYWVSNASGNIVSSVNMISRMLINRFTMRYKKATYEPDVDLGSGTRNIGIESEIPNLDIIGKRIEKIKQEHETSWHYDQDHPYKTWAYHGSYETKQTGSASSMVNGVVRLLTKPWDVVPMVTQMAMTDTTPFGQQRVFKEKVDTRTQEPKEGTKKLMKITAEWLWKELGKKKTPRMCTREEFTRKVRSNAALGAIFTDENKWKSAREAVEDSRFWELVDKERNLHLEGKCETCVYNMMGKREKKLGEFGKAKGSRAIWYMWLGARFLEFEALGFLNEDHWFSRENSLSGVEGEGLHKLGYILRDVSKKEGGAMYADDTAGWDTRITLEDLKNEEMVTNHMEGEHKKLAEAIFKLTYQNKVVRVQRPTPRGTVMDIISRRDQRGSGQVGTYGLNTFTNMEAQLIRQMEGEGVFKSIQHLTITEEIAVQNWLARVGRERLSRMAISGDDCVVKPLDDRFASALTALNDMGKIRKDIQQWEPSRGWNDWTQVPFCSHHFHELIMKDGRVLVVPCRNQDELIGRARISQGAGWSLRETACLGKSYAQMWSLMYFHRRDLRLAANAICSAVPSHWVPTSRTTWSIHAKHEWMTTEDMLTVWNRVWIQENPWMEDKTPVESWEEIPYLGKREDQWCGSLIGLTSRATWAKNIQAAINQVRSLIGNEEYTDYMPSMKRFRREEEEAGVLW")
 
-#load("/Users/ptdolan/Google Drive/DenguePanelsAndOutput4-18/fitnesstable_All.Rdata")
+#PDBs
+input<-read.csv("~/Research/ProteinBioinformatics/inputPDBs.txt", sep = "\t", header = F)
 
+#Fitness Data
+load("/Users/ptdolan/Google Drive/DenguePanelsAndOutput4-18/fitnesstable_All.Rdata")
+
+Wtable[,FE:=(1-wrel)*freq]
 WtableMap<-Wtable[muttype=="NonSyn",]
 
-dispFuncFitness<-function(X){
+dispFunc<-function(X){
   if(length(X)>0){
     return(max(X))
   }
@@ -21,7 +28,7 @@ dispFuncFitness<-function(X){
 }
 
 #Control function to edit for specific analysis
-pdbMapFitness<-function(pdbF,Wt=WtableMap,aligner="water"){
+pdbMap<-function(pdbF,Wt=WtableMap,aligner="water"){
   for (S in c("A","B")){
     for (H in c("Mosquito","Human")){
       inputWs<-Wt[(Wt$set==S)&(Wt$host==H),]
@@ -30,7 +37,7 @@ pdbMapFitness<-function(pdbF,Wt=WtableMap,aligner="water"){
       mapped<-Aligned[[2]]
       atom<-data.table(pdbO$atoms)
       atom[,temp:=-1]
-      atom[recname=="ATOM"&mapped=="mapped", temp:=dispFunc(inputWs[(inputWs$pos==resid),]), by=c("chainid","resid")]
+      atom[recname=="ATOM"&mapped=="mapped", temp:=dispFunc(inputWs$wrel.ciLower[(inputWs$pos==resid)]), by=c("chainid","resid")]
       #pdbO$atoms$resid<-atom$resid
       pdbO$atoms$temp<- (atom$temp+1.05)
       Rpdb::write.pdb(x = pdbO, file = paste("~/Research/Structures/Fitness_",H,"_",S,"_",pdbF,".pdb",sep=""))
@@ -38,10 +45,7 @@ pdbMapFitness<-function(pdbF,Wt=WtableMap,aligner="water"){
   }
 }
 
-
-Wtable[,FE:=(1-wrel)*freq]
-
-pdbMapFitness<-function(pdbF,Wt=WtableMap,aligner="water"){
+pdbFEMap<-function(pdbF,Wt=WtableMap,aligner="water"){
   for (S in c("A","B")){
     for (H in c("Mosquito","Human")){
       inputWs<-Wt[(Wt$set==S)&(Wt$host==H),]
@@ -49,15 +53,14 @@ pdbMapFitness<-function(pdbF,Wt=WtableMap,aligner="water"){
       pdbO<-Aligned[[1]]
       mapped<-Aligned[[2]]
       atom<-data.table(pdbO$atoms)
-      atom[,temp:=-1]
-      atom[recname=="ATOM"&mapped=="mapped",temp:=dispFunc(inputWs$wrel.ciLower[(inputWs$pos==(resid))]),by=c("chainid","resid")]
+      atom[,temp:=0]
+      atom[recname=="ATOM"&mapped=="mapped",temp:=sum(inputWs$FE[(inputWs$pos==(resid))],na.rm=T),by=c("chainid","resid")]
       #pdbO$atoms$resid<-atom$resid
-      pdbO$atoms$temp<- (atom$temp+1.05)
-      Rpdb::write.pdb(x = pdbO, file = paste("~/Research/Structures/Fitness_",H,"_",S,"_",pdbF,".pdb",sep=""))
+      pdbO$atoms$temp<- scale(atom$temp)
+      Rpdb::write.pdb(x = pdbO, file = paste("~/Research/Structures/FE_",H,"_",S,"_",pdbF,".pdb",sep=""))
     }
   }
 }
-
 
 pdbAligner<-function(pdbF, templateSeq, aligner="water"){
   pdbInput<-curl::curl_download(paste("https://files.rcsb.org/view/",pdbF,".pdb",sep=""),"curl.pdb")
@@ -89,15 +92,16 @@ pdbAligner<-function(pdbF, templateSeq, aligner="water"){
           print(paste(pdbF,chain,".phy",sep=""))
           write.phylip(alignment,filepath = paste(pdbF,chain,".phy",sep="")) # Output alignment for QC
           alnMat <- alignment %>% Biostrings::as.matrix() %>% t()
-          print(boundaries)
+          #print(boundaries)
           rangeSub<-boundaries$start:boundaries$end
+          #print(rangeSub)
           if (boundaries$width>1){
             if(length(rangeSub)!=nrow(alnMat)){
+              X<-0
               print("Removing gaps from reference...")
               for (row in 1:nrow(indels)){
-                for(gap in 1:indels$width[row]){
-                  rangeSub<-append(rangeSub,values = indels$start[row],after=indels$start[row])
-                }
+                  rangeSub<-append(rangeSub,values = 0,after=indels$start[row]+X-1)
+                  X=X+indels$width[row]
               }
             }
           alnDF<-data.frame(alnMat,pos=rangeSub)
@@ -115,9 +119,9 @@ pdbAligner<-function(pdbF, templateSeq, aligner="water"){
       #clean up gaps and assign residue positions based on full-length protein
       if (nrow(alnDF)>0){
         gapCleanedDF<-alnDF[alnDF[,1]!="-",] #remove gaps in query.
-        filteredSeq<-seqtable[!is.na(seqtable$. %>% str_lowercase() %>% str_title_case() %>% a())]
-        jointDF<-data.frame(filteredSeq, gapCleanedDF)
-        atomTable[chainid==chain&recname=="ATOM",resid:=jointDF[(jointDF$chainid==chain)&(jointDF$resid==resid),"pos"],by=eleid]
+        filteredSeq<-seqtable[!is.na(seqtable$. %>% str_lowercase() %>% str_title_case() %>% a())] #remove waters and other non-residue characters from structure table
+        jointDF<-data.frame(filteredSeq, gapCleanedDF) #merge the tables
+        atomTable[chainid==chain&recname=="ATOM",resid:=as.integer(jointDF[(jointDF$chainid==chain)&(jointDF$resid==resid),"pos"]),by=eleid]
         atomTable[chainid==chain&recname=="ATOM",mapped:="mapped",by=eleid]
         }
     }
@@ -128,18 +132,12 @@ pdbAligner<-function(pdbF, templateSeq, aligner="water"){
   
 }
 
-pdbMap("4M9F")
-pdbMap("2JSF")
-pdbMap("1OAM")
-pdbMap("1OK8")
-pdbMap("4UTC")
-pdbMap("4O6B")
-pdbMap("3EVG")
-pdbMap("2R29")
-pdbMap("2R69")
-pdbMap("3C5X")
-pdbMap("3C6E")
+for (PDB in input$V3[44:length(input$V3)]){ 
+  print(PDB)
+  try(
+  pdbMap(PDB)
+  )
+#  pdbFEMap(PDB)
+}
 
-input<-read.csv("~/Research/ProteinBioinformatics/inputPDBs.txt", sep = "\t", header = F)
 
-for (PDB in input$V2){ pdbMap(PDB) }
